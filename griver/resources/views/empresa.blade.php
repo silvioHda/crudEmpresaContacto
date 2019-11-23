@@ -8,13 +8,13 @@
 	</div>
 
 	<div>
-		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal1">Agregar nuevo</button>
+		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal1">Agregar nuevo</button>
 	</div>
 
 	<div class="mt-3">
 
 		<table class="table">
-			<thead class="thead-dark">
+			<thead class="bg-primary">
 				<tr>
 					<th scope="col">Id</th>
 					<th scope="col">Empresa</th>
@@ -35,7 +35,7 @@
 					<td id="tel">{{$empresas->telefono}}</td>
 					<td>
 
-						<button type="button" value="{{$empresas->id}}" class="btn btn-warning" data-toggle="modal" data-target="#myModal2" >
+						<button type="button" value="{{$empresas->id}}" class="btn btn-warning"  >
 							<a href="{{url('editEmpresa/'.$empresas->id)}}"><img src="https://img.icons8.com/pastel-glyph/24/000000/edit.png"></a>
 						</button>
 						<button type="button" class="btn btn-danger" value="{{$empresas->id}}" data-toggle="modal" data-target="#myModal2"><img src="https://img.icons8.com/android/24/000000/trash.png"></button>
@@ -54,7 +54,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 
-				<h4 class="modal-title" id="myModalLabel">Modal 1</h4>
+				<h4 class="modal-title" id="myModalLabel">Registrar empresa</h4>
 			</div>
 
 			<div class="modal-body">
@@ -77,12 +77,12 @@
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="inputCity">Telefono</label>
-							<input type="num" name="telefono" class="form-control" id="inputCity" placeholder="Teléfono">
+							<input type="num" name="telefono" class="form-control" id="inputCity" placeholder="Teléfono" minlength="10" maxlength="10">
 						</div>
 
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Save changes</button>
+						<button type="submit" class="btn btn-primary">Registrar</button>
 					</form>
 
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -98,14 +98,14 @@
 		<div class="modal-content">
 			<div class="modal-header">
 
-				<h4 class="modal-title" id="myModalLabel">Modal 1</h4>
+				<h4 class="modal-title" id="myModalLabel">Eliminar Empresa</h4>
 			</div>
 
 			<div class="modal-body">
 				<h5>¿Desea eliminar?</h5>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary"><a href="{{url('deleteEmpresa/'.$empresas->id)}}">Eliminar</a></button>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<a href="{{url('deleteEmpresa/'.$empresas->id)}}"><button type="submit" class="btn btn-danger">Eliminar</button></a>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 				</div>
 			</div>
 		</div>

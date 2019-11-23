@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Empresa;
+use App\Contacto;
 use DB;
 class PageController extends Controller
 {
      public function index()
     {
-        return view('welcome');
+    	$empresa = DB::table('empresa')->get();
+        return view('welcome')->with('empresa',$empresa);
     }
 
     public function indexEmpresa()
@@ -17,10 +19,12 @@ class PageController extends Controller
     	$empresa = DB::table('empresa')->get();
         return view('empresa')->with('empresa',$empresa);
     }
-    public function indexContacto()
-    {
-        return view('contacto');
+    public function monitor($id)
+    {	
+    	$empresa = DB::table('empresa')->where('id',$id)->first();
+        return view('monitor')->with('empresa',$empresa);
     }
+   
 
     public function storeEmpresa(Request $request)
     {
@@ -51,6 +55,44 @@ class PageController extends Controller
     	$empresa = Empresa::findOrFail($id);
     	$empresa->delete();
         return redirect('/empresa');
+    }
+     public function indexContacto()
+    {
+    	$empresa = DB::table('empresa')->get();
+    	$contacto = DB::table('contacto')->get();
+        return view('contacto')->with('empresa',$empresa)->with('contacto',$contacto);
+    }
+    public function storeContacto(Request $request)
+    {
+    	$contacto = new Contacto();
+    	$contacto->nombre = $request->nombre;
+    	$contacto->apellidos = $request->apellidos;
+    	$contacto->sexo=$request->sexo;
+    	$contacto->telefono=$request->telefono;
+    	$contacto->email=$request->email;
+    	$contacto->idEmpresa=$request->empresa;
+    	$contacto->save();
+        return redirect('/contacto');
+    }
+
+    public function showContacto($id)
+    {	
+    	$contacto = DB::table('contacto')->where('id',$id)->first();
+    	$empresa = DB::table('empresa')->get();
+        return view('editContacto')->with('contacto',$contacto)->with('empresa',$empresa);
+    }
+    public function updateContacto(Request $request,$id)
+    {
+    	$contacto = Contacto::findOrFail($id);
+    	$input = $request->all();
+    	$contacto->fill($input)->save();
+        return redirect('/contacto');
+    }
+    public function deleteContacto($id)
+    {	
+    	$contacto = Contacto::findOrFail($id);
+    	$contacto->delete();
+        return redirect('/contacto');
     }
 
 }

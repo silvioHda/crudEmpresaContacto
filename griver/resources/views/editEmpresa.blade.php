@@ -2,6 +2,10 @@
 
 @section('content')
 
+<div class="row justify-content-center my-3">
+    <h3>Editar Empresa</h3>
+</div>
+
 <div class=" justify-content-center">
 	<form action="{{url('/updateEmpresa/'.$empresa->id)}}" method="POST">
 					{{csrf_field()}}
@@ -27,7 +31,7 @@
 
 					</div>
 					
-						<button type="submit" class="btn btn-primary">Save changes</button>
+						<button type="submit" class="btn btn-primary">Guardar cambios</button>
 					</form>
 </div>
 
